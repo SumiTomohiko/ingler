@@ -1,5 +1,6 @@
 #include <dirent.h>
 #include <errno.h>
+#include <getopt.h>
 #include <libgen.h>
 #include <stdarg.h>
 #include <stdbool.h>
@@ -120,10 +121,29 @@ compute_directory(struct ingler* ingler, const char* prog)
 }
 
 int
-main(int argc, const char* argv[])
+main(int argc, char* argv[])
 {
     openlog(getprogname(), LOG_PID, LOG_DAEMON);
     syslog(LOG_INFO, "starting.");
+
+    int period = 6;
+
+    struct option options[] = {
+        { "period", required_argument, NULL, 'p' },
+        { NULL, 0, NULL, 0 }
+    };
+    int opt;
+    while ((opt = getopt_long(argc, argv, "+", options, NULL)) != -1) {
+        switch (opt) {
+        case 'p':
+            period = atoi(optarg);
+            break;
+        case '?':
+        default:
+            die(LOG_ERR, "unknown option: %c", opt);
+            break;
+        }
+    }
 
     if (signal(SIGTERM, sigterm_handler) == SIG_ERR) {
         die(1, "failed to signal(2): %s", strerror(errno));
@@ -142,7 +162,7 @@ main(int argc, const char* argv[])
 
     while (!terminated) {
         run_jobs(&ingler);
-        sleep(1);
+        sleep(period);
     }
 
     syslog(LOG_INFO, "stopped.");
