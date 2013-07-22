@@ -48,7 +48,7 @@ job_main(const char* prog)
     char* dir = dirname(buf);
     DIR* dirp = opendir(dir);
     if (dirp == NULL) {
-        die(1, "failed opendir(3): %s", dir);
+        die(1, "failed to opendir(3): %s", dir);
     }
     char prefix[MAXPATHLEN];
     snprintf(prefix, sizeof(prefix), "%s.", getprogname());
@@ -99,10 +99,10 @@ main(int argc, const char* argv[])
 
     char cwd[MAXPATHLEN];
     if (getcwd(cwd, sizeof(cwd)) == NULL) {
-        die(1, "failed getcwd(3): %s", strerror(errno));
+        die(1, "failed to getcwd(3): %s", strerror(errno));
     }
     if (daemon(0, 1) != 0) {
-        die(1, "failed daemon(3): %s", strerror(errno));
+        die(1, "failed to daemon(3): %s", strerror(errno));
     }
     char prog[MAXPATHLEN];
     snprintf(prog, sizeof(prog), "%s/%s", cwd, argv[0]);
