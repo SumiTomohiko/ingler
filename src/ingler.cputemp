@@ -1,0 +1,11 @@
+#!/usr/local/bin/perl
+
+open(IN, "sysctl dev.cpu |") or die($!);
+while (<IN>) {
+    if (m/\Adev\.cpu\.(\d+)\.temperature:\s*([\d\.]+)C\Z/) {
+        printf("cpu[%d]=%d\n", $1, $2);
+    }
+}
+close(IN);
+
+# vim: tabstop=4 shiftwidth=4 expandtab softtabstop=4
