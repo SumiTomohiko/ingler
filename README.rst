@@ -18,7 +18,7 @@ ingler repeats the following sequence periodically.
 For example
 -----------
 
-Assume that you have the following modules::
+Assume that you have the following modules
 
 * /usr/local/bin/ingler.cpufreq
 * /usr/local/bin/ingler.diskusage
@@ -41,7 +41,7 @@ Notification is the roll of any other systems.
 Standard modules
 ----------------
 
-ingler has modules of::
+ingler has modules of
 
 * ingler.cputemp: the module to monitor CPU temperature
 
