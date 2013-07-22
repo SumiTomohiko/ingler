@@ -40,6 +40,24 @@ The building instruction is::
 
     $ ./configure && make && sudo make install
 
+How to start/stop
+=================
+
+How to start
+------------
+
+::
+
+    # echo 'ingler_enable="YES"' >> /etc/rc.conf
+    # service ingler start
+
+How to stop
+-----------
+
+::
+
+    # service ingler stop
+
 About the name
 ==============
 
