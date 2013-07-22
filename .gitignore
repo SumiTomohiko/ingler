@@ -4,6 +4,9 @@
 /cmake_install.cmake
 /configure.conf
 /install_manifest.txt
+/rc.d/CMakeFiles
+/rc.d/Makefile
+/rc.d/cmake_install.cmake
 /src/CMakeFiles
 /src/Makefile
 /src/cmake_install.cmake

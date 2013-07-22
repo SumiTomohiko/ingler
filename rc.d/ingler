@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# PROVIDE: ingler
+# REQUIRE: DAEMON
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="ingler"
+rcvar="ingler_enable"
+
+load_rc_config $name
+
+command="/usr/local/bin/ingler"
+
+run_rc_command "$1"

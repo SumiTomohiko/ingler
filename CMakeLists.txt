@@ -7,6 +7,6 @@ set(CMAKE_C_COMPILER clang)
 #set(CMAKE_C_FLAGS "-Wall -Wextra -Werror -O3")
 set(CMAKE_C_FLAGS "-Wall -Werror -O3")
 
-subdirs(src)
+subdirs(src rc.d)
 
 # vim: tabstop=4 shiftwidth=4 expandtab softtabstop=4
