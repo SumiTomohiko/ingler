@@ -2,8 +2,48 @@
 ingler
 ******
 
-ingler is a system monitoring tool. It runs commands periodically, and syslog
+ingler is a system monitoring tool. It runs commands periodically, and syslog's
 these stdout.
+
+How does it work?
+=================
+
+ingler repeats the following sequence periodically.
+
+1.  scans the install directory to find executables which have the prefix of
+    "ingler." ("ingler" with one dot, such as "ingler.cputemp").
+2.  executes all of them.
+3.  sends STDOUT of these to syslog.
+
+For example
+-----------
+
+Assume that you have the following modules::
+
+* /usr/local/bin/ingler.cpufreq
+* /usr/local/bin/ingler.diskusage
+
+ingler executes these two in each period. If ingler.diskusage outputs to
+STDOUT::
+
+    usage=90%
+
+it will be syslog'ed.
+
+ingler does not
+---------------
+
+ingler does not notify any incidents. All ingler does is only monitoring.
+Notification is the roll of any other systems.
+
+Standard modules
+----------------
+
+ingler has modules of::
+
+* ingler.cputemp: the module to monitor CPU temperature
+
+It are installed by default with ingler.
 
 Requirements
 ============
