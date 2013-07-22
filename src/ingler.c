@@ -2,6 +2,7 @@
 #include <errno.h>
 #include <libgen.h>
 #include <stdarg.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -10,6 +11,8 @@
 #include <sys/types.h>
 #include <syslog.h>
 #include <unistd.h>
+
+static bool terminated = false;
 
 static void
 die(int status, const char* fmt, ...)
@@ -79,10 +82,20 @@ job_main(const char* prog)
     closedir(dirp);
 }
 
+static void
+sigterm_handler(int sig)
+{
+    terminated = true;
+}
+
 int
 main(int argc, const char* argv[])
 {
     openlog(getprogname(), LOG_PID, LOG_DAEMON);
+
+    if (signal(SIGTERM, sigterm_handler) == SIG_ERR) {
+        die(1, "failed to signal(2): %s", strerror(errno));
+    }
 
     char cwd[MAXPATHLEN];
     if (getcwd(cwd, sizeof(cwd)) == NULL) {
@@ -94,7 +107,7 @@ main(int argc, const char* argv[])
     char prog[MAXPATHLEN];
     snprintf(prog, sizeof(prog), "%s/%s", cwd, argv[0]);
 
-    while (1) {
+    while (!terminated) {
         job_main(prog);
         sleep(1);
     }
