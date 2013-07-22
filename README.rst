@@ -28,7 +28,9 @@ STDOUT::
 
     usage=90%
 
-it will be syslog'ed.
+it will be syslog'ed, for example::
+
+    Jul 23 02:09:29 <daemon.info> hostname ingler[13138]: diskusage: usage=90%
 
 ingler does not
 ---------------
