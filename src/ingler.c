@@ -92,6 +92,7 @@ int
 main(int argc, const char* argv[])
 {
     openlog(getprogname(), LOG_PID, LOG_DAEMON);
+    syslog(LOG_INFO, "starting.");
 
     if (signal(SIGTERM, sigterm_handler) == SIG_ERR) {
         die(1, "failed to signal(2): %s", strerror(errno));
@@ -112,6 +113,7 @@ main(int argc, const char* argv[])
         sleep(1);
     }
 
+    syslog(LOG_INFO, "stopped.");
     closelog();
 
     return 0;
