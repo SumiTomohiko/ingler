@@ -45,6 +45,13 @@ ingler has modules of::
 
 It are installed by default with ingler.
 
+Command line options
+====================
+
+ingler accepts the following command line options.
+
+* --period: length of each period in seconds. Default is 6[sec].
+
 Requirements
 ============
 
@@ -89,6 +96,7 @@ How to start
 ::
 
     # echo 'ingler_enable="YES"' >> /etc/rc.conf
+    # echo 'ingler_flags="--period 60"' >> /etc/rc.conf
     # service ingler start
 
 How to stop
